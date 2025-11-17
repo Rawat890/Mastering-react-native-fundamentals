@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Dimensions, Text, View, Image, StyleSheet } from "react-native";
-import { useSharedValue } from "react-native-reanimated";
-import Carousel, { ICarouselInstance, Pagination } from "react-native-reanimated-carousel";
+import Carousel, { ICarouselInstance } from "react-native-reanimated-carousel";
 import { scale } from "react-native-size-matters";
 import { COLORS } from "../utils/colors";
 import { SLIDER_DATA } from "../utils/data";
@@ -14,22 +13,14 @@ const { width, height } = Dimensions.get("window");
 
 export default function AppSlider() {
   const ref = React.useRef<ICarouselInstance>(null);
-  const progress = useSharedValue<number>(0);
-  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [activeIndex, setActiveIndex] = React.useState(0);
 
-  const onPressPagination = (index: number) => {
-    ref.current?.scrollTo({
-      count: index - progress.value,
-      animated: true,
-    });
-  };
-
-  const handleGetStarted = () => {
-    navigate(SCREENS.Home);
-  };
-
-  const onSnapToItem = (index: number) => {
-    setCurrentIndex(index);
+  const handleNext = () => {
+    if (activeIndex === SLIDER_DATA.length - 1) {
+      navigate(SCREENS.Home);
+      return;
+    }
+    ref.current?.scrollTo({ count: 1, animated: true });
   };
 
   return (
@@ -37,42 +28,28 @@ export default function AppSlider() {
       <Carousel
         ref={ref}
         width={width}
-        height={height * 0.75}
+        height={width * 1.4}
         data={SLIDER_DATA}
-        onProgressChange={progress}
-        onSnapToItem={onSnapToItem}
         pagingEnabled
+        onProgressChange={(_, absoluteProgress) => {
+          const index = Math.round(absoluteProgress);
+          setActiveIndex(index);
+        }}
         renderItem={({ item }) => (
           <View style={styles.slide}>
             <Image source={item.image} style={styles.image} resizeMode="contain" />
-            <View style={styles.textContainer}>
-              <Text style={styles.title}>{item.title}</Text>
-              <Text style={styles.subtitle}>{item.subtitle}</Text>
-            </View>
+            <Text style={styles.title}>{item.title}</Text>
+            <Text style={styles.subtitle}>{item.subtitle}</Text>
           </View>
         )}
       />
-      
-      <View style={styles.bottomContainer}>
-        <View style={styles.dotContainer}>
-          <Pagination.Basic
-            progress={progress}
-            data={SLIDER_DATA}
-            dotStyle={styles.dot}
-            activeDotStyle={styles.activeDot}
-            containerStyle={styles.container}
-            onPress={onPressPagination}
-          />
-        </View>
-        
-        {currentIndex === SLIDER_DATA.length - 1 && (
-          // <View style={styles.buttonContainer}>
-          <TextButton onPress={handleGetStarted}>
-            GET STARTED
-          </TextButton>
-            // </View>
-        )}
+
+      <View style={styles.buttonContainer}>
+        <TextButton size="medium" onPress={handleNext}>
+          {activeIndex === SLIDER_DATA.length - 1 ? "Get Started" : "Next"}
+        </TextButton>
       </View>
+
     </View>
   );
 }
@@ -82,7 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.lightBlue
   },
-  container: { 
+  container: {
     gap: 8,
   },
   slide: {
@@ -103,7 +80,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(10),
   },
   title: {
-    fontSize: scale(24),
+    fontSize: FONT_SIZE["3xl"],
     fontWeight: "700",
     color: COLORS.black,
     textAlign: "center",
@@ -112,9 +89,9 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: FONT_SIZE.lg,
-    fontWeight: FONT_WEIGHT.bold,
+    fontWeight: FONT_WEIGHT.medium,
     textAlign: "center",
-    color: COLORS.red,
+    color: COLORS.purple,
     paddingHorizontal: scale(10),
     lineHeight: scale(22),
   },
@@ -139,8 +116,9 @@ const styles = StyleSheet.create({
   dotContainer: {
     marginBottom: scale(20),
   },
-  buttonContainer:{
-  marginHorizontal: scale(10),
+  buttonContainer: {
+    marginHorizontal: scale(10),
+    marginTop: scale(100)
   },
   button: {
     backgroundColor: COLORS.purple,
