@@ -5,5 +5,12 @@ export const COLORS = {
   yellow: "#FFF599",
   lightBlue: "#9EFFFF",
   purple: "#B69CFF",
-  red: "#FF0000"
+  red: "#FF0000",
+  white: "#FFFFFF",
+  black: "#000000",
+  lightGray: "#f9fafb",
+  gray: "#4b5563",
+  danger: "#dc2626",
+  warning: "#f59e0b",
+  success: "#16a34a",
 }
