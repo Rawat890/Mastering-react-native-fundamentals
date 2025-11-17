@@ -60,7 +60,7 @@ export default function TextButton({
   iconLeft,
   iconRight,
   iconSpacing = 8,
-  iconSize, // optional override
+  iconSize,
   style,
   contentStyle,
   rippleColor,
@@ -106,11 +106,11 @@ export default function TextButton({
   const palette = useMemo(() => {
     return {
       primary: {
-        background: '#2563eb', // blue-600
+        background: '#2563eb',
         text: '#ffffff',
       },
       secondary: {
-        background: '#e5e7eb', // gray-200
+        background: '#e5e7eb',
         text: '#111827',
       },
       ghost: {
@@ -167,7 +167,7 @@ export default function TextButton({
   }, [releasePressAnimation]);
 
   const contentColor = disabledOrLoading
-    ? '#9ca3af' // gray-400 when disabled
+    ? '#9ca3af'
     : palette.text;
 
   const containerBackground = variant === 'ghost' ? 'transparent' : palette.background;
