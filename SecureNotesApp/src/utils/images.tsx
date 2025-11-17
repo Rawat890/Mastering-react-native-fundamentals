@@ -1,0 +1,1 @@
+export const trash = require('../assets/icons/trash.png')
