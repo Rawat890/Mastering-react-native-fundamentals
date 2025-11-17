@@ -1,13 +1,15 @@
+import { scale } from "react-native-size-matters";
+
 export const FONT_SIZE = {
-  xs: 10,
-  sm: 12,
-  md: 14,
-  base: 16,
-  lg: 18,
-  xl: 20,
-  "2xl": 24,
-  "3xl": 30,
-  "4xl": 36,
+  xs: scale(10),
+  sm: scale(12),
+  md: scale(14),
+  base: scale(16),
+  lg: scale(18),
+  xl: scale(20),
+  "2xl": scale(24),
+  "3xl": scale(30),
+  "4xl": scale(36),
 } as const;
 
 export const FONT_WEIGHT = {
@@ -23,20 +25,20 @@ export const FONT_WEIGHT = {
 } as const;
 
 export const SPACING = {
-  xs: 4,
-  sm: 8,
-  md: 12,
-  lg: 16,
-  xl: 20,
-  "2xl": 24,
-  "3xl": 32,
-  "4xl": 40,
+  xs: scale(4),
+  sm: scale(8),
+  md: scale(12),
+  lg: scale(16),
+  xl: scale(20),
+  "2xl": scale(24),
+  "3xl": scale(32),
+  "4xl": scale(40),
 } as const;
 
 export const RADIUS = {
-  sm: 4,
-  md: 8,
-  lg: 12,
-  xl: 16,
+  sm: scale(4),
+  md: scale(8),
+  lg: scale(12),
+  xl: scale(16),
   full: 9999,
 } as const;
