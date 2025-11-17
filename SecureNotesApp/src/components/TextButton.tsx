@@ -14,7 +14,7 @@ import {
   Easing,
   ColorValue,
 } from 'react-native';
-
+import { scale } from "react-native-size-matters";
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 export type ButtonSize = 'small' | 'medium' | 'large';
 
@@ -72,31 +72,32 @@ export default function TextButton({
   const [isPressed, setIsPressed] = useState(false);
   const lastTapRef = useRef<number>(0);
 
-  // animated scale for press feedback
-  const scale = useRef(new Animated.Value(1)).current;
+  // animated animatedScale for press feedback
+  const animatedScale = useRef(new Animated.Value(1)).current;
 
   const disabledOrLoading = disabled || loading;
 
   const sizes = useMemo(() => {
     return {
       small: {
-        paddingVertical: 6,
-        paddingHorizontal: 10,
-        fontSize: 14,
-        minHeight: 36,
-        iconSize: 16,
+        paddingVertical: scale(6),
+        paddingHorizontal: scale(10),
+        fontSize: scale(14),
+        minHeight: scale(36),
+        iconSize: scale(16),
       },
       medium: {
-        paddingVertical: 10,
-        paddingHorizontal: 14,
-        fontSize: 16,
-        minHeight: 44,
-        iconSize: 20,
+        paddingVertical: scale(10),
+        paddingHorizontal: scale(14),
+        fontSize: scale(16),
+        minHeight: scale(44),
+        iconSize: scale(20),
       },
       large: {
-        paddingVertical: 14,
-        paddingHorizontal: 18,
-        fontSize: 18,
+        paddingVertical:
+          (14),
+        paddingHorizontal: scale(18),
+        fontSize: scale(18),
         minHeight: 52,
         iconSize: 24,
       },
@@ -127,22 +128,22 @@ export default function TextButton({
   const resolvedIconSize = iconSize ?? sizes.iconSize;
 
   const startPressAnimation = useCallback(() => {
-    Animated.timing(scale, {
+    Animated.timing(animatedScale, {
       toValue: 0.98,
       duration: 120,
       easing: Easing.out(Easing.ease),
       useNativeDriver: true,
     }).start();
-  }, [scale]);
+  }, [animatedScale]);
 
   const releasePressAnimation = useCallback(() => {
-    Animated.timing(scale, {
+    Animated.timing(animatedScale, {
       toValue: 1,
       duration: 180,
       easing: Easing.out(Easing.ease),
       useNativeDriver: true,
     }).start();
-  }, [scale]);
+  }, [animatedScale]);
 
   const handlePress = useCallback(
     (e: GestureResponderEvent) => {
@@ -181,7 +182,7 @@ export default function TextButton({
   return (
     <Animated.View
       style={[
-        { transform: [{ scale }] },
+        { transform: [{ scale: animatedScale }] },
         styles.wrapper,
         disabledOrLoading && styles.wrapperDisabled,
       ]}
@@ -266,6 +267,7 @@ export default function TextButton({
 const styles = StyleSheet.create({
   wrapper: {
     alignSelf: 'stretch',
+    marginHorizontal: scale(20),
   },
   wrapperDisabled: {
     opacity: 0.85,
