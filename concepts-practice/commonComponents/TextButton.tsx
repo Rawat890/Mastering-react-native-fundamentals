@@ -18,18 +18,25 @@ interface TextButtonProps {
 
 export default function TextButton({ label, mode, onPress, disabled, onPressIn, onPressOut, textColor, buttonColor, style }: TextButtonProps) {
   return (
-    <View style={styles.buttonContainer}>
-      <Button mode={mode} onPress={onPress} disabled={disabled} style={[{ backgroundColor: buttonColor, padding: 10 }, style]} labelStyle={[styles.labelStyle, {color: textColor }]}>
-        {label}
-      </Button>
+    <View style={{marginTop: 10}}>
+    <Button
+      mode={mode}
+      onPress={onPress}
+      disabled={disabled}
+      style={[{ backgroundColor: buttonColor }, style]}
+      contentStyle={styles.buttonContainer}
+      labelStyle={[styles.labelStyle, { color: textColor }]}
+    >
+      {label}
+    </Button>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    padding: 12,
-    marginVertical: 15,
+    padding: 2,
+    marginVertical: 5,
   },
-  labelStyle: { fontSize: 20, fontFamily: fontNames.bold}
+  labelStyle: { fontSize: 20, fontFamily: fontNames.bold }
 })
