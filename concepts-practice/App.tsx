@@ -1,11 +1,30 @@
+import { useFonts } from 'expo-font';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import InformationForm from './source1/components/InformationForm';
+import { fontFamily } from './source1/utils/fontfamily';
 
 function App() {
+    const [fontsLoaded] = useFonts({
+    RalewayBold: fontFamily.ralewayBold,
+    RalewayLight: fontFamily.ralewayLight,
+    RalewayItalic: fontFamily.ralewayItalic,
+    RalewayMedium: fontFamily.ralewayMedium,
+    RalewayRegular: fontFamily.ralewayRegular,
+    RalewaySemiBold: fontFamily.ralewaySemiBold,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+  console.log(fontsLoaded)
+
   return (
-    <View>
-      <Text>App</Text>
-    </View>
+  <SafeAreaProvider>
+    <SafeAreaView edges={['top', 'bottom']} style={{flex:1}}>
+    <InformationForm/>
+    </SafeAreaView>
+  </SafeAreaProvider>
   )
 }
 
