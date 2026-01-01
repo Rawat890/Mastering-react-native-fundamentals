@@ -1,4 +1,4 @@
-import { fontNames } from '@/source1/utils/fontfamily';
+import { fontNames } from '@/utils/fontfamily';
 import * as React from 'react';
 import { Appbar, useTheme } from 'react-native-paper';
 

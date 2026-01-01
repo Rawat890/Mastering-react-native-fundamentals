@@ -1,7 +1,7 @@
+import { fontNames } from '@/utils/fontfamily';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Switch } from 'react-native-paper';
-import { fontNames } from '../utils/fontfamily';
 
 export default function SwitchComponent() {
   const [isSwitchOn, setIsSwitchOn] = useState(false);

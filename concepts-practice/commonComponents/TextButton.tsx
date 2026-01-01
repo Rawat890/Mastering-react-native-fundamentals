@@ -1,4 +1,4 @@
-import { fontNames } from '@/source1/utils/fontfamily';
+import { fontNames } from '@/utils/fontfamily';
 import React from 'react';
 import { GestureResponderEvent, StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-paper';

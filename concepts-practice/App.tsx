@@ -2,7 +2,7 @@ import { useFonts } from 'expo-font';
 import React from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import InformationForm from './source1/components/InformationForm';
-import { fontFamily } from './source1/utils/fontfamily';
+import { fontFamily } from './utils/fontfamily';
 
 function App() {
     const [fontsLoaded] = useFonts({

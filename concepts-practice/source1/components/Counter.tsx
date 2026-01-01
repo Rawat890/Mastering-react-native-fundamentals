@@ -1,6 +1,6 @@
+import { fontNames } from '@/utils/fontfamily';
 import React, { useState } from 'react';
 import { Button, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { fontNames } from '../utils/fontfamily';
 
 export default function Counter() {
   const [count, setCount] = useState(0);
