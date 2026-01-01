@@ -2,7 +2,7 @@ import Header from '@/commonComponents/Header'
 import InputWithLabel from '@/commonComponents/InputWithLabel'
 import TextButton from '@/commonComponents/TextButton'
 import { yupResolver } from '@hookform/resolvers/yup'
-import React from 'react'
+import React, { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { ScrollView, StyleSheet, View } from 'react-native'
 import { InformationFormSchema } from '../schemas/InformationFormSchema'
@@ -25,6 +25,7 @@ type InformationFormData = {
 };
 
 export default function InformationForm() {
+  const [loading, setLoading] = useState(false);
 
   const {
     control,
@@ -50,9 +51,19 @@ export default function InformationForm() {
     },
   });
 
-  const onSubmit = (data: InformationFormData) => {
-    console.log('Form Data:', data);
+  const onSubmit = async (data: InformationFormData) => {
+    setLoading(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      console.log('Form Data:', data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   return (
     <View style={{ flex: 1 }}>
@@ -178,25 +189,25 @@ export default function InformationForm() {
           control={control}
           name='pincode'
           render={({ field: { onChange, value } }) => (
-            <InputWithLabel placeholder='Enter pincode' error={errors.pincode?.message} onChangeText={onChange} value={value} keyboardType='phone-pad'/>
+            <InputWithLabel placeholder='Enter pincode' error={errors.pincode?.message} onChangeText={onChange} value={value} keyboardType='phone-pad' />
           )}
         />
         <Controller
           control={control}
           name='highestEducationLevel'
           render={({ field: { onChange, value } }) => (
-            <InputWithLabel placeholder='Enter highest education level'error={errors.highestEducationLevel?.message} onChangeText={onChange} value={value} />
+            <InputWithLabel placeholder='Enter highest education level' error={errors.highestEducationLevel?.message} onChangeText={onChange} value={value} />
           )}
         />
         <Controller
           control={control}
           name='yearOfGraduation'
           render={({ field: { onChange, value } }) => (
-            <InputWithLabel placeholder='Enter year of graduation/Post-graduation'error={errors.yearOfGraduation?.message} onChangeText={onChange} value={value} keyboardType='phone-pad'/>
+            <InputWithLabel placeholder='Enter year of graduation/Post-graduation' error={errors.yearOfGraduation?.message} onChangeText={onChange} value={value} keyboardType='phone-pad' />
           )}
         />
 
-        <TextButton mode='contained' label='Submit Data' textColor='red' buttonColor='blue' onPress={handleSubmit(onSubmit)} />
+        <TextButton mode='contained' label='Submit Data' textColor='red' buttonColor='blue' onPress={handleSubmit(onSubmit)} loading={loading} />
       </ScrollView>
     </View>
   )
