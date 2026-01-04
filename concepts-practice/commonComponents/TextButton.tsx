@@ -51,8 +51,8 @@ export default function TextButton({
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    padding: 2,
-    marginVertical: 5,
+    padding: 0,
+    marginVertical: 0,
   },
   labelStyle: { fontSize: 20, fontFamily: fontNames.bold }
 })
