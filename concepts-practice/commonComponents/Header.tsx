@@ -27,7 +27,8 @@ export default function Header({
   const theme = useTheme();
 
   return (
-    <Appbar.Header elevated={elevated} >
+    <Appbar.Header elevated={elevated} statusBarHeight={0}
+>
       {/* Left */}
       {showBackAction && (
         <Appbar.BackAction
