@@ -4,10 +4,144 @@ Primitive Types: Basic types like number, string, boolean, null, undefined, and 
 Object Types: Complex structures including arrays, classes, interfaces, and functions.
 
 Type	                              Description
-Object	                 Represents any non-primitive type; however, its use is discouraged in favor of more specific types.
+Object	                 Represents any non - primitive type; however, its use is discouraged in favor of more specific types.
 Array	                   Represents a collection of elements of a specific type.
 Tuple	                   Represents an array with a fixed number of elements of specific types.
 Enum	                   Represents a set of named constants, allowing for a collection of related values.
 Function	               Represents a callable entity; can define parameter and return types.
 Class	                   Defines a blueprint for creating objects with specific properties and methods.
 Interface	               Describes the shape of an object, specifying property names and types.
+
+
+  In 2008, js launched V8 engine, converted Interpreted language-- -> Just -in -time language
+JIT - COMBINATION OF COMPLILE AND INTERPRETED language
+Along with interpreting it also compiles the code
+
+function() { } -->
+  1st time executes-- > converted to binary 
+next time whenever we call the function, it gives the binary code to cpu directly(Just in time)
+
+Platform dependent and Platform independent
+
+Feature	                     Platform Dependent Language	                                        Platform Independent Language
+Definition	                 Code runs only on a specific OS or hardware platform	                Code can run on multiple platforms without modification
+Compilation	                 Compiled into machine code for a specific platform	                  Compiled into intermediate code or bytecode
+Portability	                 ❌ Low portability	                                                 ✅ High portability
+Example	                     C, C++	                                                              Java, JavaScript
+Execution	                   Needs recompilation for different OS / CPU	                          Runs on any system with the required runtime or virtual machine
+
+  ***************************************************************
+
+  Typescript---------------------------> JavaScript
+Transpilation(same as compilation, just a fancy name)
+
+  ***************************************************************
+
+  let obj1: { name: string, age: number, address ?: string } = {
+  name: 'Rohan Rawat',
+    age: 24
+}
+
+***************************************************************
+
+  INTERFACE VS TYPE
+
+interface customer {
+  name: string,
+  age: number,
+  balance: number
+}
+
+//PARTIAL - properties become optional
+//REQUIRED - properties become neccessary
+//READONLY - properties become immutable
+const obj2: Partial<customer> = {
+  name: "Rohit",
+  balance: 333
+}
+
+  **************************** ARRAY OF OBJECTS *****************************
+
+    interface people {
+  name: string,
+    age: number
+}
+
+let personsArray: people[] = [
+  { name: 'e', age: 33 },
+  { name: 'd', age: 13 },
+  { name: 'k', age: 23 },
+  { name: 'e', age: 31 },
+]
+
+  **************************** CLASSES IN TYPESCRIPT *******************************
+    class Person {
+      name: string,
+      age: number
+
+      constructor(n1: string, n2: number) {
+        this.name = n1;
+        this.age = n2;
+      }
+    }
+
+const obj1 = new Person('d', 22)
+
+TYPE ASSERTION -
+let value: any = "This is a string";
+let lengthOfString: number = (value as string).length;
+
+console.log(lengthOfString);
+A variable value is declared with the type any, which means it can hold any type of value.
+Using a type assertion (as string), the compiler is informed that the value should be treated as a string.
+The length property is then accessed safely because the compiler recognizes the value as a string.
+
+What are the Modules in Typescript ?
+Modules in TypeScript allow you to organize code into reusable, manageable, and logical units by encapsulating functionalities into separate files.
+
+They help avoid global namespace pollution by providing scoped declarations.
+Modules can be imported and exported, enabling code reuse and better maintainability.
+
+math.ts (Module File):
+
+export function add(a: number, b: number): number {
+  return a + b;
+}
+
+
+######### We can not assign values of other types to a variable that is declared as a null type. only null and undefined can be assigned.
+######### The null can not be assigned to undefined type variables:
+
+1️⃣ Encapsulation
+
+Encapsulation means hiding internal details of an object and allowing access only through controlled methods.
+It protects data from being modified directly.
+
+Simple Definition
+Encapsulation = Data + Methods bundled together and restricting direct access to the data.
+
+2️⃣ Binding
+
+Binding means connecting a function with an object so that this refers to that object.
+In JavaScript/TypeScript, this can change depending on how a function is called.
+
+Example Problem
+const user = {
+  name: "Rohan",
+  greet() {
+    console.log(this.name);
+  }
+};
+
+const greetFunction = user.greet;
+greetFunction(); 
+
+Output:
+
+undefined
+
+Because this is lost.
+
+Fix using Binding
+const greetFunction = user.greet.bind(user);
+greetFunction();
